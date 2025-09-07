@@ -38,3 +38,59 @@ class PersonCl {
   }
 }
 const bob = new PersonCl('Bob', 1999);
+
+////////////////////////////////////////////////////////////////////////////
+
+//Encapsulation: Private Class Fields and Methods
+
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+// STATIC version of these 4
+
+class Account {
+  //1) Public fields
+  lacale = navigator.language;
+  bank = 'Bankertina';
+
+  // 2) Private fields
+  #movments = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin; //ovo je kao let variabla
+    //this.movments = [];
+    //this.locale = navigator.language;
+  }
+
+  // Public interface (API)
+  //3) Public methods
+
+  getMovements() {
+    return this.#movments;
+  }
+  deposit(val) {
+    this.#movments.push(val);
+  }
+  widthdraw(val) {
+    this.deposit(-val);
+  }
+
+  // 4) Private methods
+  #approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+    }
+  }
+}
+const acc1 = new Account('Luka', 'EUR', 1111);
+acc1.deposit(150);
+acc1.widthdraw(70);
+console.log(acc1);
